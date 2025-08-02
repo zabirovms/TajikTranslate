@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <style>
         :root {
             --bg-primary: #ffffff;
@@ -17,6 +18,12 @@
             --text-secondary: #4a5568;
             --accent: #2b6cb0;
             --accent-hover: #2c5282;
+        }
+        :root.dark {
+            --bg-primary: #1a202c;
+            --bg-secondary: #2d3748;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
         }
         html {
             scroll-behavior: smooth;
@@ -55,7 +62,7 @@
 <body class="bg-var(--bg-primary) text-var(--text-secondary) font-sans">
     <!-- Header/Navigation -->
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <nav class="container mx-auto px-6 py-2 flex justify-between items-center">
             <a href="#" class="text-2xl font-serif" style="color: var(--accent);">TajikTranslate</a>
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#about" class="hover:text-[var(--accent)] transition-colors">About</a>
@@ -64,9 +71,14 @@
                 <a href="#testimonials" class="hover:text-[var(--accent)] transition-colors">Testimonials</a>
                 <a href="#contact" class="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white px-5 py-2 rounded-md font-medium transition-colors">Contact</a>
             </div>
-            <button class="md:hidden text-gray-600" id="menu-toggle">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="text-gray-600 dark:text-gray-300">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button class="md:hidden text-gray-600" id="menu-toggle">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
         </nav>
         
         <!-- Mobile menu -->
@@ -112,15 +124,15 @@
     <section class="py-20 md:py-28">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl md:text-5xl font-serif text-center mb-16">Professional Experience</h2>
-            <div class="max-w-3xl mx-auto relative">
-                <div class="absolute left-1/2 h-full w-0.5 bg-gray-200 -translate-x-1/2"></div>
-                <div class="space-y-16">
-                    <div class="relative flex items-center">
+            <div class="max-w-3xl mx-auto relative swiper-container professional-experience-swiper">
+                <div class="absolute left-1/2 h-full w-0.5 bg-gray-200 -translate-x-1/2 hidden md:block"></div>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide relative flex items-center md:space-y-0 space-y-16">
                         <div class="hidden md:block w-1/2 pr-8 text-right">
                             <h3 class="text-2xl font-serif">Freelance Translator & Consultant</h3>
                             <p class="text-gray-500">2015 - Present</p>
                         </div>
-                        <div class="absolute left-1/2 w-4 h-4 rounded-full bg-[var(--accent)] -translate-x-1/2"></div>
+                        <div class="absolute left-1/2 w-4 h-4 rounded-full bg-[var(--accent)] -translate-x-1/2 hidden md:block"></div>
                         <div class="w-full md:w-1/2 md:pl-8">
                             <div class="bg-white p-6 rounded-lg shadow-lg">
                                 <h3 class="md:hidden text-2xl font-serif mb-2">Freelance Translator & Consultant</h3>
@@ -134,7 +146,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="relative flex items-center">
+                    <div class="swiper-slide relative flex items-center md:space-y-0 space-y-16">
                         <div class="w-full md:w-1/2 md:pr-8 md:text-right">
                             <div class="bg-white p-6 rounded-lg shadow-lg">
                                 <h3 class="md:hidden text-2xl font-serif mb-2">Language Specialist</h3>
@@ -146,13 +158,14 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="absolute left-1/2 w-4 h-4 rounded-full bg-[var(--accent)] -translate-x-1/2"></div>
+                        <div class="absolute left-1/2 w-4 h-4 rounded-full bg-[var(--accent)] -translate-x-1/2 hidden md:block"></div>
                         <div class="hidden md:block w-1/2 pl-8">
                             <h3 class="text-2xl font-serif">Language Specialist</h3>
                             <p class="text-gray-500">2010 - 2015</p>
                         </div>
                     </div>
                 </div>
+                <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
@@ -161,43 +174,52 @@
     <section id="services" class="py-20 md:py-28" style="background-color: var(--bg-secondary);">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl md:text-5xl font-serif text-center mb-16">What I Offer</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="service-card bg-white p-8 rounded-lg shadow-lg text-center">
-                    <div class="text-[var(--accent)] mb-6">
-                        <i class="fas fa-language text-5xl"></i>
+            <div class="swiper-container services-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="service-card bg-white p-8 rounded-lg shadow-lg text-center h-full">
+                            <div class="text-[var(--accent)] mb-6">
+                                <i class="fas fa-language text-5xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-serif mb-4">Language & Content</h3>
+                            <ul class="space-y-3 text-gray-600 text-left">
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Translation (EN, TJ, RU, FA)</span></li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Localization for Tajik audiences</span></li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Audio/video transcription</span></li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Editing & proofreading</span></li>
+                            </ul>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-serif mb-4">Language & Content</h3>
-                    <ul class="space-y-3 text-gray-600 text-left">
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Translation (EN, TJ, RU, FA)</span></li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Localization for Tajik audiences</span></li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Audio/video transcription</span></li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Editing & proofreading</span></li>
-                    </ul>
-                </div>
-                <div class="service-card bg-white p-8 rounded-lg shadow-lg text-center">
-                    <div class="text-[var(--accent)] mb-6">
-                        <i class="fas fa-film text-5xl"></i>
+                    <div class="swiper-slide">
+                        <div class="service-card bg-white p-8 rounded-lg shadow-lg text-center h-full">
+                            <div class="text-[var(--accent)] mb-6">
+                                <i class="fas fa-film text-5xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-serif mb-4">Audiovisual & Media</h3>
+                            <ul class="space-y-3 text-gray-600 text-left">
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Time-coded subtitling</span></li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>On-screen captions</span></li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Voice-over coordination</span></li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Script translation</span></li>
+                            </ul>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-serif mb-4">Audiovisual & Media</h3>
-                    <ul class="space-y-3 text-gray-600 text-left">
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Time-coded subtitling</span></li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>On-screen captions</span></li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Voice-over coordination</span></li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Script translation</span></li>
-                    </ul>
-                </div>
-                <div class="service-card bg-white p-8 rounded-lg shadow-lg text-center">
-                    <div class="text-[var(--accent)] mb-6">
-                        <i class="fas fa-search-dollar text-5xl"></i>
+                    <div class="swiper-slide">
+                        <div class="service-card bg-white p-8 rounded-lg shadow-lg text-center h-full">
+                            <div class="text-[var(--accent)] mb-6">
+                                <i class="fas fa-search-dollar text-5xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-serif mb-4">Business Intelligence</h3>
+                            <ul class="space-y-3 text-gray-600 text-left">
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Local fact-checking & risk assessment</span></li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Business & employment verification</span></li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Document & ID verification</span></li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Field research & local guidance</span></li>
+                            </ul>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-serif mb-4">Business Intelligence</h3>
-                    <ul class="space-y-3 text-gray-600 text-left">
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Local fact-checking & risk assessment</span></li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Business & employment verification</span></li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Document & ID verification</span></li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Field research & local guidance</span></li>
-                    </ul>
                 </div>
+                <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
@@ -205,11 +227,11 @@
     <!-- Language & Tools Section -->
     <section id="languages" class="py-20 md:py-28">
         <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                 <div class="text-center md:text-left">
                     <h2 class="text-4xl md:text-5xl font-serif mb-6">Languages & Tools</h2>
                     <p class="text-lg leading-relaxed mb-8">I work with a range of languages and cutting-edge tools to ensure the highest quality and efficiency for your projects.</p>
-                    <div class="grid grid-cols-2 gap-8 text-lg">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-lg">
                         <div>
                             <h3 class="text-2xl font-serif mb-4">Language Pairs</h3>
                             <ul class="space-y-2">
@@ -228,7 +250,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
                         <div class="tool-card bg-white p-4 rounded-lg shadow-lg text-center transition">
                             <i class="fas fa-file-word text-[var(--accent)] text-4xl mb-3"></i>
                             <h3 class="font-medium">Trados Studio</h3>
@@ -263,28 +285,37 @@
     <section id="testimonials" class="py-20 md:py-28" style="background-color: var(--bg-secondary);">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl md:text-5xl font-serif text-center mb-16">Client Experiences</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="testimonial-card bg-white p-8 rounded-lg shadow-lg relative">
-                    <div class="text-yellow-400 mb-4 text-xl">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <div class="swiper-container testimonials-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="testimonial-card bg-white p-8 rounded-lg shadow-lg relative">
+                            <div class="text-yellow-400 mb-4 text-xl">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 mb-6 leading-relaxed">"Muhammadsharif's translations are consistently accurate and culturally appropriate. His deep understanding of both languages and regional context makes him our go-to translator for all Tajik-related projects."</p>
+                            <div class="font-semibold text-right text-gray-700">— International NGO Director</div>
+                        </div>
                     </div>
-                    <p class="text-gray-600 mb-6 leading-relaxed">"Muhammadsharif's translations are consistently accurate and culturally appropriate. His deep understanding of both languages and regional context makes him our go-to translator for all Tajik-related projects."</p>
-                    <div class="font-semibold text-right text-gray-700">— International NGO Director</div>
-                </div>
-                <div class="testimonial-card bg-white p-8 rounded-lg shadow-lg relative">
-                    <div class="text-yellow-400 mb-4 text-xl">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card bg-white p-8 rounded-lg shadow-lg relative">
+                            <div class="text-yellow-400 mb-4 text-xl">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 mb-6 leading-relaxed">"We've worked with Muhammadsharif on several legal document translations. His attention to detail and knowledge of legal terminology in both English and Tajik is exceptional."</p>
+                            <div class="font-semibold text-right text-gray-700">— Law Firm Partner</div>
+                        </div>
                     </div>
-                    <p class="text-gray-600 mb-6 leading-relaxed">"We've worked with Muhammadsharif on several legal document translations. His attention to detail and knowledge of legal terminology in both English and Tajik is exceptional."</p>
-                    <div class="font-semibold text-right text-gray-700">— Law Firm Partner</div>
-                </div>
-                <div class="testimonial-card bg-white p-8 rounded-lg shadow-lg relative">
-                    <div class="text-yellow-400 mb-4 text-xl">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card bg-white p-8 rounded-lg shadow-lg relative">
+                            <div class="text-yellow-400 mb-4 text-xl">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 mb-6 leading-relaxed">"As a documentary filmmaker, I relied on Muhammadsharif for accurate subtitling and script translation. His work helped our film resonate authentically with Tajik audiences."</p>
+                            <div class="font-semibold text-right text-gray-700">— Documentary Filmmaker</div>
+                        </div>
                     </div>
-                    <p class="text-gray-600 mb-6 leading-relaxed">"As a documentary filmmaker, I relied on Muhammadsharif for accurate subtitling and script translation. His work helped our film resonate authentically with Tajik audiences."</p>
-                    <div class="font-semibold text-right text-gray-700">— Documentary Filmmaker</div>
                 </div>
+                <div class="swiper-pagination"></div>
             </div>
             <div class="text-center mt-16">
                 <a href="#contact" class="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white px-8 py-4 rounded-md font-medium transition-colors text-lg">Request Sample Work</a>
@@ -297,44 +328,6 @@
         <div class="container mx-auto px-6">
             <h2 class="text-4xl md:text-5xl font-serif text-center mb-16">Get in Touch</h2>
             <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
-                <div class="space-y-6">
-                    <div class="flex items-start gap-4">
-                        <i class="fas fa-envelope text-2xl text-[var(--accent)] mt-1"></i>
-                        <div>
-                            <h3 class="text-xl font-serif">Email</h3>
-                            <a href="mailto:zabirovms@gmail.com" class="text-gray-600 hover:text-[var(--accent)] transition-colors">zabirovms@gmail.com</a>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4">
-                        <i class="fas fa-phone text-2xl text-[var(--accent)] mt-1"></i>
-                        <div>
-                            <h3 class="text-xl font-serif">Phone</h3>
-                            <a href="tel:+992988894346" class="text-gray-600 hover:text-[var(--accent)] transition-colors">+992 98 889 4346</a>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4">
-                        <i class="fas fa-globe text-2xl text-[var(--accent)] mt-1"></i>
-                        <div>
-                            <h3 class="text-xl font-serif">ProZ Profile</h3>
-                            <a href="https://www.proz.com/profile/3974887" target="_blank" class="text-gray-600 hover:text-[var(--accent)] transition-colors">proz.com/profile/3974887</a>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4">
-                        <i class="fab fa-upwork text-2xl text-[var(--accent)] mt-1"></i>
-                        <div>
-                            <h3 class="text-xl font-serif">Upwork</h3>
-                            <a href="https://www.upwork.com/freelancers/~014a96385c75074d91" target="_blank" class="text-gray-600 hover:text-[var(--accent)] transition-colors">upwork.com/profile</a>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4">
-                        <i class="fab fa-font-awesome-flag text-2xl text-[var(--accent)] mt-1"></i>
-                        <div>
-                            <h3 class="text-xl font-serif">Fiverr</h3>
-                            <a href="https://www.fiverr.com/muhammadzabirov" target="_blank" class="text-gray-600 hover:text-[var(--accent)] transition-colors">fiverr.com/muhammadzabirov</a>
-                        </div>
-                    </div>
-                </div>
-                
                 <div>
                     <form action="https://formspree.io/f/xrblalqv" method="POST" class="space-y-6" id="contact-form">
                         <div>
@@ -354,6 +347,43 @@
                         </button>
                         <p id="form-message" class="text-green-600 font-medium hidden pt-2">Your message was sent successfully!</p>
                     </form>
+                </div>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-envelope text-2xl text-[var(--accent)] mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-serif">Email</h3>
+                            <a href="mailto:zabirovms@gmail.com" class="text-gray-600 hover:text-[var(--accent)] transition-colors">zabirovms@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <i class="fab fa-whatsapp text-2xl text-[var(--accent)] mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-serif">WhatsApp</h3>
+                            <a href="https://wa.me/992988894346" class="text-gray-600 hover:text-[var(--accent)] transition-colors">+992 98 889 4346</a>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-globe text-2xl text-[var(--accent)] mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-serif">ProZ Profile</h3>
+                            <a href="https://www.proz.com/profile/3974887" target="_blank" class="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white px-5 py-2 rounded-md font-medium transition-colors">View ProZ Profile</a>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <i class="fab fa-upwork text-2xl text-[var(--accent)] mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-serif">Upwork Profile</h3>
+                            <a href="https://www.upwork.com/freelancers/~014a96385c75074d91" target="_blank" class="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white px-5 py-2 rounded-md font-medium transition-colors">View Upwork Profile</a>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <i class="fab fa-font-awesome-flag text-2xl text-[var(--accent)] mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-serif">Fiverr Profile</h3>
+                            <a href="https://www.fiverr.com/muhammadzabirov" target="_blank" class="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white px-5 py-2 rounded-md font-medium transition-colors">View Fiverr Profile</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -401,4 +431,56 @@
             }
         });
     </script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    if (window.innerWidth < 768) {
+        new Swiper('.professional-experience-swiper', {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+        new Swiper('.testimonials-swiper', {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+        new Swiper('.services-swiper', {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.querySelector('html');
+
+    themeToggle.addEventListener('click', () => {
+        html.classList.toggle('dark');
+        localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        updateThemeIcon();
+    });
+
+    function updateThemeIcon() {
+        const icon = themeToggle.querySelector('i');
+        if (html.classList.contains('dark')) {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        } else {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+    }
+
+    // On page load, check for saved theme and set it
+    if (localStorage.getItem('theme') === 'dark') {
+        html.classList.add('dark');
+    } else {
+        html.classList.remove('dark');
+    }
+    updateThemeIcon();
+</script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=zabirovms/freelance" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
 </html>
